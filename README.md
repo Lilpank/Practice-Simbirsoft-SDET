@@ -35,3 +35,9 @@ mvn clean verify
 <p style="text-align: center;">Результат работы тестов:</p>
 
 ![AllureReport.png](src/test/resources/pictures/AllureReport.png)
+
+Результаты применения CI/CD с помощью Jenkins.
+
+![SuccessBuildFromJenkins.png](src/test/resources/pictures/SuccessBuildFromJenkins.png)
+
+![ResultTestFromJenkins.png](src/test/resources/pictures/ResultTestFromJenkins.png)
