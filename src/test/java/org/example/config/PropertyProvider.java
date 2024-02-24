@@ -1,4 +1,4 @@
-package org.example.helpers;
+package org.example.config;
 
 import java.io.FileInputStream;
 import java.io.IOException;

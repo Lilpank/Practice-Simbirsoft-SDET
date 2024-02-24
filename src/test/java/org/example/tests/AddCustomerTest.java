@@ -1,15 +1,16 @@
 package org.example.tests;
 
 import io.qameta.allure.*;
+import org.example.config.SuiteDataProvider;
 import org.example.dto.CustomerDTO;
 import org.example.helpers.Generator;
-import org.example.helpers.PropertyProvider;
 import org.example.pages.AddCustomerPage;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 public class AddCustomerTest extends BaseTest {
     private final String notificationMessageSuccess = "Customer added successfully with customer id";
@@ -17,7 +18,12 @@ public class AddCustomerTest extends BaseTest {
     private AddCustomerPage addCustomerPage = null;
     private WebDriver driver = null;
 
-    private SoftAssert softAssert = null;
+    private final String url;
+
+    @Factory(dataProvider = "getDataWebUrl", dataProviderClass = SuiteDataProvider.class)
+    public AddCustomerTest(String url) {
+        this.url = url;
+    }
 
     /**
      * A method to initialize the driver, add customer page, and soft assert.
@@ -25,10 +31,10 @@ public class AddCustomerTest extends BaseTest {
     @BeforeTest
     public void init() {
         driver = instanceDriver();
-        driver.get(PropertyProvider.getPropertyWebUrl());
+//        driver.get(PropertyProvider.getPropertyWebUrl());
+        driver.get(url);
         addCustomerPage = new AddCustomerPage(driver);
         addCustomerPage.clickBtnTabAddCustomer();
-        softAssert = new SoftAssert();
     }
 
     /**
@@ -50,7 +56,7 @@ public class AddCustomerTest extends BaseTest {
         addCustomerPage.clickBtnSubmitCustomer();
 
         String notificationMessage = driver.switchTo().alert().getText();
-        softAssert.assertTrue(notificationMessage.contains(notificationMessageSuccess));
+        Assert.assertTrue(notificationMessage.contains(notificationMessageSuccess));
         driver.switchTo().alert().accept();
     }
 

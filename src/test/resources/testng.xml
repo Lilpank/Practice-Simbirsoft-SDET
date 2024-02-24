@@ -1,6 +1,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="MyTestSuite" parallel="tests" thread-count="2">
+    <parameter name="webUrl"
+               value="https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager"/>
     <test name="TestGroup1" parallel="classes">
         <classes>
             <class name="org.example.tests.AddCustomerTest"/>

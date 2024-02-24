@@ -1,15 +1,16 @@
 package org.example.tests;
 
 import io.qameta.allure.*;
+import org.example.config.SuiteDataProvider;
 import org.example.helpers.ArraysSorter;
 import org.example.helpers.Filter;
-import org.example.helpers.PropertyProvider;
 import org.example.helpers.Utils;
 import org.example.pages.CustomersPage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -19,17 +20,24 @@ public class CustomersTest extends BaseTest {
 
     private CustomersPage customersPage = null;
 
+    private final String url;
+
+    @Factory(dataProvider = "getDataWebUrl", dataProviderClass = SuiteDataProvider.class)
+    public CustomersTest(String url) {
+        this.url = url;
+    }
+
     /**
      * A method to initialize the driver, add customer page, and soft assert.
      */
     @BeforeTest
     public void init() {
         driver = instanceDriver();
-        driver.get(PropertyProvider.getPropertyWebUrl());
+//        driver.get(PropertyProvider.getPropertyWebUrl());
+        driver.get(url);
         customersPage = new CustomersPage(driver);
         customersPage.clickBtnTabCustomers();
     }
-
 
     /**
      * A test to check sorting customers by firstName.
@@ -51,7 +59,7 @@ public class CustomersTest extends BaseTest {
 
         ArraysSorter.toggleSortDirection((List<String>) customersFirstName);
 
-        Assert.assertEquals((Utils.joinIterableWithDelimiter(customersFirstName, "")), customersFirstNameAfterClickSort);
+        Assert.assertEquals((Utils.joinIterableWithDelimiter(customersFirstName, " ")), customersFirstNameAfterClickSort);
     }
 
     /**
@@ -67,7 +75,7 @@ public class CustomersTest extends BaseTest {
         var firstName = customersPage.findMinNameRelativeToAverage();
         customersPage.deleteCustomerByFirstName(firstName);
 
-        var customersFirstName = String.join(" ", Filter.getFirstNamesFromCustomers(customersPage.getCustomers()));
+        var customersFirstName = Utils.joinIterableWithDelimiter(Filter.getFirstNamesFromCustomers(customersPage.getCustomers()), " ");
 
         Assert.assertFalse(customersFirstName.contains(firstName));
     }

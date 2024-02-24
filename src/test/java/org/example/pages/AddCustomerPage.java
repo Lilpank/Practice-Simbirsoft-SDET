@@ -16,7 +16,7 @@ public class AddCustomerPage extends BasePage {
     /**
      * WebElement representing the button to switch to the "Add Customer" tab.
      */
-    @FindBy(xpath = "//button[@class='btn btn-lg tab btn-primary']")
+    @FindBy(xpath = "//button[normalize-space()='Add Customer']")
     private WebElement btnTabAddCustomer;
 
     /**
