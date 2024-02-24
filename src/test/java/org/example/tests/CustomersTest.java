@@ -1,25 +1,23 @@
 package org.example.tests;
 
-import io.qameta.allure.Description;
-import io.qameta.allure.Step;
+import io.qameta.allure.*;
 import org.example.helpers.ArraysSorter;
 import org.example.helpers.Filter;
+import org.example.helpers.PropertyProvider;
+import org.example.helpers.Utils;
 import org.example.pages.CustomersPage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
-public class TestCustomersPage extends TestBasePage {
+public class CustomersTest extends BaseTest {
     private WebDriver driver = null;
 
     private CustomersPage customersPage = null;
-
-    private SoftAssert softAssert = null;
 
     /**
      * A method to initialize the driver, add customer page, and soft assert.
@@ -27,44 +25,51 @@ public class TestCustomersPage extends TestBasePage {
     @BeforeTest
     public void init() {
         driver = instanceDriver();
+        driver.get(PropertyProvider.getPropertyWebUrl());
         customersPage = new CustomersPage(driver);
         customersPage.clickBtnTabCustomers();
-        softAssert = new SoftAssert();
     }
 
 
     /**
      * A test to check sorting customers by firstName.
      */
-    @Test(priority = 1)
+
+    @Epic("Customers management")
+    @Feature("Sorting customers by first name")
     @Description("Test check sorting customers by firstName")
-    @Step
+    @Severity(SeverityLevel.NORMAL)
+    @Owner("DanGor")
+    @Test(priority = 1)
     public void testSortCustomersByFirstName() {
         var customersFirstName = Filter.getFirstNamesFromCustomers(customersPage.getCustomers());
 
         customersPage.clickSortFirstName();
-        var customersFirstNameAfterClickSort = String.join(" ", Filter.getFirstNamesFromCustomers(customersPage.getCustomers()));
+        var customersFirstNameAfterClickSort = Utils.joinIterableWithDelimiter(Filter.getFirstNamesFromCustomers(customersPage.getCustomers()), " ");
 
-        Assert.assertNotEquals(String.join(" ", customersFirstName), customersFirstNameAfterClickSort);
+        Assert.assertNotEquals(Utils.joinIterableWithDelimiter(customersFirstName, " "), customersFirstNameAfterClickSort);
 
         ArraysSorter.toggleSortDirection((List<String>) customersFirstName);
 
-        Assert.assertEquals((String.join(" ", customersFirstName)), customersFirstNameAfterClickSort);
+        Assert.assertEquals((Utils.joinIterableWithDelimiter(customersFirstName, "")), customersFirstNameAfterClickSort);
     }
 
     /**
      * Test check delete customer by firstName
      */
+    @Epic("Customers management")
+    @Feature("Delete customer by first name")
+    @Description("The test checks the deletion of the client by the minimum length of the name relative to the average value")
+    @Severity(SeverityLevel.CRITICAL)
+    @Owner("DanGor")
     @Test(priority = 2)
-    @Description("Test check delete customer by firstName")
-    @Step
     public void testDeleteCustomerByAVGLengthOfFirstName() {
-        var firstName = customersPage.getCustomerMinLengthFirstName();
+        var firstName = customersPage.findMinNameRelativeToAverage();
         customersPage.deleteCustomerByFirstName(firstName);
 
         var customersFirstName = String.join(" ", Filter.getFirstNamesFromCustomers(customersPage.getCustomers()));
 
-        softAssert.assertFalse(customersFirstName.contains(firstName));
+        Assert.assertFalse(customersFirstName.contains(firstName));
     }
 
     @AfterTest

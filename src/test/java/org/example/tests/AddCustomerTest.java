@@ -1,9 +1,9 @@
 package org.example.tests;
 
-import io.qameta.allure.Description;
-import io.qameta.allure.Step;
+import io.qameta.allure.*;
 import org.example.dto.CustomerDTO;
 import org.example.helpers.Generator;
+import org.example.helpers.PropertyProvider;
 import org.example.pages.AddCustomerPage;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
@@ -11,7 +11,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class TestAddCustomerPage extends TestBasePage {
+public class AddCustomerTest extends BaseTest {
     private final String notificationMessageSuccess = "Customer added successfully with customer id";
 
     private AddCustomerPage addCustomerPage = null;
@@ -25,6 +25,7 @@ public class TestAddCustomerPage extends TestBasePage {
     @BeforeTest
     public void init() {
         driver = instanceDriver();
+        driver.get(PropertyProvider.getPropertyWebUrl());
         addCustomerPage = new AddCustomerPage(driver);
         addCustomerPage.clickBtnTabAddCustomer();
         softAssert = new SoftAssert();
@@ -33,9 +34,12 @@ public class TestAddCustomerPage extends TestBasePage {
     /**
      * Test check create customer
      */
-    @Test
+    @Epic("Customers management")
+    @Feature("Adding a new customer")
     @Description("Test check create customer")
-    @Step
+    @Severity(SeverityLevel.CRITICAL)
+    @Owner("DanGor")
+    @Test
     public void testAddCustomer() {
         var postCode = Generator.generatePostCode();
         var firstName = Generator.generateFirstName(postCode);

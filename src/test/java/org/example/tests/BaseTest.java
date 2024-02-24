@@ -4,9 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeSuite;
 
-public class TestBasePage {
-    private static final String url = "https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager";
-
+public class BaseTest {
     public WebDriver chromeDriver = null;
 
     /**
@@ -25,8 +23,6 @@ public class TestBasePage {
     public WebDriver instanceDriver() {
         if (chromeDriver == null) {
             chromeDriver = new ChromeDriver();
-            chromeDriver.get(url);
-            return chromeDriver;
         }
         return chromeDriver;
     }

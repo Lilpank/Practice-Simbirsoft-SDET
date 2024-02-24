@@ -1,5 +1,6 @@
 package org.example.pages;
 
+import net.bytebuddy.description.type.TypeDescription;
 import org.example.helpers.Filter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,16 +13,37 @@ import java.util.List;
 import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
 
+/**
+ * Represents the page where customers can be managed.
+ * Extends BasePage class.
+ */
 public class CustomersPage extends BasePage {
+    /**
+     * WebElement representing the button to switch to the "Customers" tab.
+     */
     @FindBy(xpath = "//button[normalize-space()='Customers']")
     private WebElement btnTabCustomers;
 
+    /**
+     * WebElement representing the button to sort by first name.
+     */
     @FindBy(xpath = "//a[normalize-space()='First Name']")
-    private WebElement btnfirstName;
+    private WebElement btnFirstName;
 
+    /**
+     * WebElement representing the input field for searching customers.
+     */
     @FindBy(css = "input[placeholder='Search Customer']")
     private WebElement inputSearchCustomer;
 
+    @FindBy(css = ".table.table-bordered.table-striped")
+    private WebElement tableCustomers;
+
+    /**
+     * Constructor for CustomersPage class.
+     *
+     * @param driver The WebDriver instance to be used.
+     */
     public CustomersPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -36,7 +58,7 @@ public class CustomersPage extends BasePage {
     }
 
     public void clickSortFirstName() {
-        click(btnfirstName);
+        click(btnFirstName);
     }
 
     /**
@@ -45,13 +67,15 @@ public class CustomersPage extends BasePage {
      * @return the text of the element found by the CSS selector
      */
     public String getCustomers() {
-        return findElement(By.cssSelector(".table.table-bordered.table-striped")).getText();
+        return tableCustomers.getText();
     }
 
     /**
-     * @return the minimum length first name of the customers
+     * Finds the customer with the shortest first name relative to the average length of all first names.
+     *
+     * @return the first name of the customer with the shortest first name
      */
-    public String getCustomerMinLengthFirstName() {
+    public String findMinNameRelativeToAverage() {
         var customersFirstName = Filter.getFirstNamesFromCustomers(getCustomers());
         List<String> firstNames = StreamSupport.stream(customersFirstName.spliterator(), false).toList();
 
@@ -76,9 +100,6 @@ public class CustomersPage extends BasePage {
 
         var indexes = IntStream.range(0, target.size()).filter(i -> target.get(i).equals(firstName)).boxed().toList();
 
-        if (indexes.isEmpty()) {
-            return;
-        }
         for (var index : indexes) {
             var btnDelete = findElement(By.xpath("//tbody/tr[" + (index + 1) + "]/td[5]//button[1]"));
             click(btnDelete);
