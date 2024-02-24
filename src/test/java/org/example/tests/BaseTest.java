@@ -13,7 +13,7 @@ public class BaseTest {
      */
     @BeforeSuite
     public void init() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver/chromedriver.exe");
     }
 
     /**
