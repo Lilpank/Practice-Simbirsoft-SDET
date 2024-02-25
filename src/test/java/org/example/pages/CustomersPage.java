@@ -35,9 +35,6 @@ public class CustomersPage extends BasePage {
     @FindBy(css = "input[placeholder='Search Customer']")
     private WebElement inputSearchCustomer;
 
-//    @FindBy(css = ".table.table-bordered.table-striped")
-//    private WebElement tableCustomers;
-
     /**
      * Constructor for CustomersPage class.
      *
