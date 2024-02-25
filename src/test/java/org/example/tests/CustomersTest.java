@@ -33,7 +33,6 @@ public class CustomersTest extends BaseTest {
     @BeforeTest
     public void init() {
         driver = instanceDriver();
-//        driver.get(PropertyProvider.getPropertyWebUrl());
         driver.get(url);
         customersPage = new CustomersPage(driver);
         customersPage.clickBtnTabCustomers();

@@ -31,7 +31,6 @@ public class AddCustomerTest extends BaseTest {
     @BeforeTest
     public void init() {
         driver = instanceDriver();
-//        driver.get(PropertyProvider.getPropertyWebUrl());
         driver.get(url);
         addCustomerPage = new AddCustomerPage(driver);
         addCustomerPage.clickBtnTabAddCustomer();
