@@ -1,6 +1,5 @@
 package org.example.pages;
 
-import net.bytebuddy.description.type.TypeDescription;
 import org.example.helpers.Filter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -49,14 +48,25 @@ public class CustomersPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
+    /**
+     * Set the input for searching a customer.
+     *
+     * @param searchCustomer the customer to search for
+     */
     public void setInputSearchCustomer(String searchCustomer) {
         send(inputSearchCustomer, searchCustomer);
     }
 
+    /**
+     * Clicks the button to switch to the "Customers" tab.
+     */
     public void clickBtnTabCustomers() {
         click(btnTabCustomers);
     }
 
+    /**
+     * Clicks the sort button for the first name.
+     */
     public void clickSortFirstName() {
         click(btnFirstName);
     }

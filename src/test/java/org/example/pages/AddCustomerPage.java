@@ -53,22 +53,43 @@ public class AddCustomerPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
+    /**
+     * Clicks the 'Add Customer' button tab.
+     */
     public void clickBtnTabAddCustomer() {
         click(btnTabAddCustomer);
     }
 
+    /**
+     * Clicks the submit customer button.
+     */
     public void clickBtnSubmitCustomer() {
         click(btnSubmitCustomer);
     }
 
+    /**
+     * Sets the input first name.
+     *
+     * @param firstName the first name to set
+     */
     private void setInputFirstName(String firstName) {
         send(inputFirstName, firstName);
     }
 
+    /**
+     * Sets the last name input.
+     *
+     * @param lastName the last name to be set
+     */
     private void setInputLastName(String lastName) {
         send(inputLastName, lastName);
     }
 
+    /**
+     * Sets the input post code.
+     *
+     * @param code the input post code to set
+     */
     private void setInputPostCode(String code) {
         send(inputPostCode, code);
     }
