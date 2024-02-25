@@ -1,10 +1,10 @@
 #!/bin/bash
 
-function step1() {
+function stepCreateNetworkJenkins() {
   docker network create jenkins;
 }
 
-function step2() {
+function stepRunDockerImageJenkins() {
 docker run --name jenkins-docker --rm --detach \
   --privileged --network jenkins --network-alias docker \
   --env DOCKER_TLS_CERTDIR=/certs \
@@ -14,11 +14,11 @@ docker run --name jenkins-docker --rm --detach \
   docker:dind --storage-driver overlay2;
 }
 
-function step3() {
+function stepBuildJenkinsBlueOcean() {
   docker build -t myjenkins-blueocean:2.440.1-1 .;
 }
 
-function step4() {
+function stepRunDockerImageJenkinsBlueOcean() {
 docker run --name jenkins-blueocean --restart=on-failure --detach \
   --network jenkins --env DOCKER_HOST=tcp://docker:2376 \
   --env DOCKER_CERT_PATH=/certs/client --env DOCKER_TLS_VERIFY=1 \
@@ -29,7 +29,7 @@ docker run --name jenkins-blueocean --restart=on-failure --detach \
 }
 
 
-step1;
-step2;
-step3;
-step4;
+stepCreateNetworkJenkins;
+stepRunDockerImageJenkins;
+stepBuildJenkinsBlueOcean;
+stepRunDockerImageJenkinsBlueOcean;
