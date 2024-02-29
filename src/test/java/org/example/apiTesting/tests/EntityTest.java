@@ -26,11 +26,11 @@ public class EntityTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Owner("DanGor")
     public void testCycleOfCreateGetDeleteEntityRequest(EntityPojo entityPojo) {
-        var entity_id = testCreateEntityRequest(entityPojo);
-        var responsePojo = testGetEntityRequest(entity_id);
-        testEqualsRequestAndResponseEntity(entityPojo, responsePojo);
-        testPatchRequestEntityById(entity_id, responsePojo);
-        testDeleteRequestEntityById(entity_id);
+        var entity_id = testCreateEntityRequestStep(entityPojo);
+        var responsePojo = testGetEntityRequestStep(entity_id);
+        testEqualsRequestAndResponseEntityStep(entityPojo, responsePojo);
+        testPatchRequestEntityByIdStep(entity_id, responsePojo);
+        testDeleteRequestEntityByIdStep(entity_id);
     }
 
     /**

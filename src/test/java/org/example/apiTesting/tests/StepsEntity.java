@@ -27,7 +27,7 @@ public class StepsEntity extends EntityTest {
     @Step("Create Entity by pojo body")
     @Severity(SeverityLevel.NORMAL)
     @Owner("DanGor")
-    public static int testCreateEntityRequest(EntityPojo entityPojo) {
+    public static int testCreateEntityRequestStep(EntityPojo entityPojo) {
         var response = given()
                 .spec(requestSpec)
                 .body(entityPojo)
@@ -49,7 +49,7 @@ public class StepsEntity extends EntityTest {
     @Step("Get Entity by ID is {idEntity}")
     @Severity(SeverityLevel.NORMAL)
     @Owner("DanGor")
-    public static EntityPojo testGetEntityRequest(int idEntity) {
+    public static EntityPojo testGetEntityRequestStep(int idEntity) {
         return given()
                 .spec(requestSpec)
                 .pathParam("id", idEntity)
@@ -69,7 +69,7 @@ public class StepsEntity extends EntityTest {
     @Step("Compares Entities request and response")
     @Severity(SeverityLevel.CRITICAL)
     @Owner("DanGor")
-    public static void testEqualsRequestAndResponseEntity(EntityPojo entityPojo, EntityPojo responsePojo) {
+    public static void testEqualsRequestAndResponseEntityStep(EntityPojo entityPojo, EntityPojo responsePojo) {
         softAssert.assertEquals(entityPojo.getId(), responsePojo.getId());
         softAssert.assertEquals(entityPojo.getAddition(), responsePojo.getAddition());
         softAssert.assertEquals(entityPojo.getTitle(), responsePojo.getTitle());
@@ -85,7 +85,7 @@ public class StepsEntity extends EntityTest {
     @Step("Delete Entity by ID is {idEntity}")
     @Severity(SeverityLevel.NORMAL)
     @Owner("DanGor")
-    public static void testDeleteRequestEntityById(int idEntity) {
+    public static void testDeleteRequestEntityByIdStep(int idEntity) {
         given()
                 .spec(requestSpec)
                 .pathParam("id", idEntity)
@@ -102,7 +102,7 @@ public class StepsEntity extends EntityTest {
     @Step("Update Entity by ID is {idEntity}")
     @Severity(SeverityLevel.NORMAL)
     @Owner("DanGor")
-    public static void testPatchRequestEntityById(int idEntity, EntityPojo entityPojo) {
+    public static void testPatchRequestEntityByIdStep(int idEntity, EntityPojo entityPojo) {
         given()
                 .spec(requestSpec)
                 .body(entityPojo)
