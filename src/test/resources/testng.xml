@@ -3,10 +3,18 @@
 <suite name="MyTestSuite" parallel="tests" thread-count="2">
     <parameter name="webUrl"
                value="https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager"/>
-    <test name="TestGroup1" parallel="classes">
+    <test name="UI" parallel="classes">
         <classes>
-            <class name="org.example.tests.AddCustomerTest"/>
-            <class name="org.example.tests.CustomersTest"/>
+            <class name="org.example.UITesting.tests.AddCustomerTest"/>
+            <class name="org.example.UITesting.tests.CustomersTest"/>
+        </classes>
+    </test>
+    <parameter name="apiUrl"
+               value="http://localhost"/>
+    <test name="API" parallel="classes">
+        <classes>
+            <class name="org.example.APITesting.tests.EntityTest"/>
         </classes>
     </test>
 </suite>
+

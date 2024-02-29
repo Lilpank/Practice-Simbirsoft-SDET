@@ -1,4 +1,4 @@
-package org.example.config;
+package org.example.UITesting.config;
 
 import java.io.FileInputStream;
 import java.io.IOException;

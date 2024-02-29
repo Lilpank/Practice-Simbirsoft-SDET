@@ -1,10 +1,10 @@
-package org.example.tests;
+package org.example.UITesting.tests;
 
 import io.qameta.allure.*;
-import org.example.config.SuiteDataProvider;
-import org.example.dto.CustomerDTO;
-import org.example.helpers.Generator;
-import org.example.pages.AddCustomerPage;
+import org.example.UITesting.config.SuiteDataProvider;
+import org.example.UITesting.dto.CustomerDTO;
+import org.example.UITesting.helpers.Generator;
+import org.example.UITesting.pages.AddCustomerPage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -39,12 +39,12 @@ public class AddCustomerTest extends BaseTest {
     /**
      * Test check create customer
      */
+    @Test
     @Epic("Customers management")
     @Feature("Adding a new customer")
     @Description("Test check create customer")
     @Severity(SeverityLevel.CRITICAL)
     @Owner("DanGor")
-    @Test
     public void testAddCustomer() {
         var postCode = Generator.generatePostCode();
         var firstName = Generator.generateFirstName(postCode);

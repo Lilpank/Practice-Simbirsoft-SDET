@@ -1,7 +1,7 @@
-package org.example.pages;
+package org.example.UITesting.pages;
 
 import lombok.Getter;
-import org.example.dto.CustomerDTO;
+import org.example.UITesting.dto.CustomerDTO;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

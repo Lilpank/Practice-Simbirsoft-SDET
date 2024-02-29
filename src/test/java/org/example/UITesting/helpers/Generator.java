@@ -1,4 +1,4 @@
-package org.example.helpers;
+package org.example.UITesting.helpers;
 
 import java.util.ArrayList;
 import java.util.Random;

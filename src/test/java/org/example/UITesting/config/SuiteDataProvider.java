@@ -1,4 +1,4 @@
-package org.example.config;
+package org.example.UITesting.config;
 
 import org.testng.ITestContext;
 import org.testng.annotations.DataProvider;

@@ -1,4 +1,4 @@
-package org.example.helpers;
+package org.example.UITesting.helpers;
 
 import java.util.Collections;
 import java.util.List;
