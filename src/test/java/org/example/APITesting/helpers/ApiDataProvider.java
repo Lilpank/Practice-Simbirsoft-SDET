@@ -13,18 +13,32 @@ import java.util.List;
 import java.util.Map;
 
 public class ApiDataProvider {
-    @DataProvider(name = "entityData")
-    public static Object[][] userData() throws IOException {
+    private static final String pathJson = "src/test/resources/json";
+
+    /**
+     * A method to provide data for entities.
+     *
+     * @return         	an array of objects containing data for entities
+     */
+    @DataProvider(name = "entitiesData")
+    public static Object[][] entitiesData() throws IOException {
         Gson gson = new Gson();
-        Type userListType = new TypeToken<List<EntityPojo>>() {}.getType();
-        List<EntityPojo> entities = gson.fromJson(new FileReader("src/test/resources/json/entityCreationBody.json"), userListType);
+        Type userListType = new TypeToken<List<EntityPojo>>() {
+        }.getType();
+        List<EntityPojo> entities = gson.fromJson(new FileReader(pathJson + "/entityCreationBody.json"), userListType);
         Object[][] data = new Object[entities.size()][1];
         for (int i = 0; i < entities.size(); i++) {
             data[i][0] = entities.get(i);
         }
-
         return data;
     }
+
+    /**
+     * A method to provide data for API URL.
+     *
+     * @param  context	ITestContext
+     * @return         	url for API
+     */
     @DataProvider(name = "getDataApiUrl")
     public static Object[][] getDataApiUrl(ITestContext context) {
         Map<String, String> suiteParams = context.getCurrentXmlTest().getSuite().getParameters();

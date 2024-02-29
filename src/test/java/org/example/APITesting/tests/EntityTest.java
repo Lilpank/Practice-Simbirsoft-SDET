@@ -26,13 +26,21 @@ public class EntityTest extends BaseTest {
         this.basePath = basePath;
     }
 
+    /**
+     * A method that initializes the necessary resources before the test.
+     */
     @BeforeTest
     public void init() {
         softAssert = new SoftAssert();
         requestSpec = instanceRequestSpec(basePath);
     }
 
-    @Test(dataProvider = "entityData", dataProviderClass = ApiDataProvider.class)
+    /**
+     * Test method for cycle of create, get and delete methods of entity
+     *
+     * @param entityPojo is entityPojo
+     */
+    @Test(dataProvider = "entitiesData", dataProviderClass = ApiDataProvider.class)
     @Epic("Entities management")
     @Feature("POST, DELETE, GET request of entity")
     @Description("Test check create, get and delete methods of entity")
@@ -42,9 +50,13 @@ public class EntityTest extends BaseTest {
         var entity_id = testCreateEntityRequest(entityPojo);
         var responsePojo = testGetEntityRequest(entity_id);
         testEqualsRequestAndResponseEntity(entityPojo, responsePojo);
+        testPatchRequestEntityById(entity_id, responsePojo);
         testDeleteRequestEntityById(entity_id);
     }
 
+    /**
+     * Test method for getting entities.
+     */
     @Test
     @Epic("Entities management")
     @Description("Check GET method request")
@@ -58,6 +70,12 @@ public class EntityTest extends BaseTest {
                 .statusCode(StatusCode.OK.getCode());
     }
 
+    /**
+     * Check POST method create request
+     *
+     * @param entityPojo Create Entity by pojo body
+     * @return id of created entity
+     */
     @Epic("Entities management")
     @Description("Check POST method request")
     @Step("Create Entity by pojo body")
@@ -76,6 +94,12 @@ public class EntityTest extends BaseTest {
         return Integer.parseInt(response.asString());
     }
 
+    /**
+     * Check GET method request
+     *
+     * @param idEntity id of entity
+     * @return response entitypojo by id
+     */
     @Epic("Entities management")
     @Description("Check GET method request")
     @Step("Get Entity by ID is {idEntity}")
@@ -94,6 +118,12 @@ public class EntityTest extends BaseTest {
         return response;
     }
 
+    /**
+     * Compares Entities request and response
+     *
+     * @param entityPojo   request EntityPojo
+     * @param responsePojo response EntityPojo
+     */
     @Epic("Entities management")
     @Description("Test compares request and response EntityPojo")
     @Step("Compares Entities request and response")
@@ -107,6 +137,11 @@ public class EntityTest extends BaseTest {
         softAssert.assertEquals(entityPojo.getImportantNumbers(), responsePojo.getImportantNumbers());
     }
 
+    /**
+     * Check DELETE method request
+     *
+     * @param idEntity id of entity
+     */
     @Epic("Entities management")
     @Description("Check DELETE method request")
     @Step("Delete Entity by ID is {idEntity}")
@@ -121,14 +156,21 @@ public class EntityTest extends BaseTest {
                 .statusCode(StatusCode.NO_CONTENT.getCode());
     }
 
+    /**
+     * Check PATCH method request
+     *
+     * @param idEntity id of entity
+     */
     @Epic("Entities management")
     @Description("Check PATCH method request")
     @Step("Update Entity by ID is {idEntity}")
     @Severity(SeverityLevel.NORMAL)
     @Owner("DanGor")
-    public void testPatchRequestEntityById(int idEntity) {
+//    @Test(dataProvider = "entityDataPatch", dataProviderClass = ApiDataProvider.class)
+    public void testPatchRequestEntityById(int idEntity, EntityPojo entityPojo) {
         given()
                 .spec(requestSpec)
+                .body(entityPojo)
                 .pathParam("id", idEntity)
                 .patch(Endpoints.updateEntity)
                 .then()
