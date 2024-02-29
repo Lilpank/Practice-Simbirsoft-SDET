@@ -1,4 +1,4 @@
-package org.example.UITesting.helpers;
+package org.example.uiTesting.helpers;
 
 public class Utils {
     /**

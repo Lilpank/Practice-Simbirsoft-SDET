@@ -1,4 +1,4 @@
-package org.example.APITesting.pojo;
+package org.example.apiTesting.pojo;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Getter;

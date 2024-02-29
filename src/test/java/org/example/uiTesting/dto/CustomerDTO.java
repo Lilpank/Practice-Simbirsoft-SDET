@@ -1,4 +1,4 @@
-package org.example.UITesting.dto;
+package org.example.uiTesting.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -5,15 +5,15 @@
                value="https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager"/>
     <test name="UI" parallel="classes">
         <classes>
-            <class name="org.example.UITesting.tests.AddCustomerTest"/>
-            <class name="org.example.UITesting.tests.CustomersTest"/>
+            <class name="org.example.uiTesting.tests.AddCustomerTest"/>
+            <class name="org.example.uiTesting.tests.CustomersTest"/>
         </classes>
     </test>
     <parameter name="apiUrl"
                value="http://localhost"/>
     <test name="API" parallel="classes">
         <classes>
-            <class name="org.example.APITesting.tests.EntityTest"/>
+            <class name="org.example.apiTesting.tests.EntityTest"/>
         </classes>
     </test>
 </suite>

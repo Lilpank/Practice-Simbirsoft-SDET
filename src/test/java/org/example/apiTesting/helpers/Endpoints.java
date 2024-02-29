@@ -1,4 +1,4 @@
-package org.example.APITesting.helpers;
+package org.example.apiTesting.helpers;
 
 public final class Endpoints {
     public static final String getEntities = "/api/getAll";

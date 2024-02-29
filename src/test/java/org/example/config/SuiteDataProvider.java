@@ -1,8 +1,8 @@
-package org.example.APITesting.helpers;
+package org.example.config;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import org.example.APITesting.pojo.EntityPojo;
+import org.example.apiTesting.pojo.EntityPojo;
 import org.testng.ITestContext;
 import org.testng.annotations.DataProvider;
 
@@ -12,13 +12,25 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
-public class ApiDataProvider {
+public class SuiteDataProvider {
     private static final String pathJson = "src/test/resources/json";
+
+    /**
+     * A method to provide data for WEB URL.
+     *
+     * @param context ITestContext
+     * @return url for WEB
+     */
+    @DataProvider(name = "getDataWebUrl")
+    public static Object[][] getDataWebUrl(ITestContext context) {
+        Map<String, String> suiteParams = context.getCurrentXmlTest().getSuite().getParameters();
+        return new Object[][]{{suiteParams.get("webUrl")}};
+    }
 
     /**
      * A method to provide data for entities.
      *
-     * @return         	an array of objects containing data for entities
+     * @return an array of objects containing data for entities
      */
     @DataProvider(name = "entitiesData")
     public static Object[][] entitiesData() throws IOException {
@@ -27,21 +39,13 @@ public class ApiDataProvider {
         }.getType();
         List<EntityPojo> entities = gson.fromJson(new FileReader(pathJson + "/entityCreationBody.json"), userListType);
         Object[][] data = new Object[entities.size()][1];
-        for (int i = 0; i < entities.size(); i++) {
-            data[i][0] = entities.get(i);
-        }
-        return data;
-    }
 
-    /**
-     * A method to provide data for API URL.
-     *
-     * @param  context	ITestContext
-     * @return         	url for API
-     */
-    @DataProvider(name = "getDataApiUrl")
-    public static Object[][] getDataApiUrl(ITestContext context) {
-        Map<String, String> suiteParams = context.getCurrentXmlTest().getSuite().getParameters();
-        return new Object[][]{{suiteParams.get("apiUrl")}};
+        int i = 0;
+        for (EntityPojo entity : entities) {
+            data[i][0] = entity;
+            i++;
+        }
+
+        return data;
     }
 }

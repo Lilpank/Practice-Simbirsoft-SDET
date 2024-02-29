@@ -1,11 +1,11 @@
-package org.example.UITesting.tests;
+package org.example.uiTesting.tests;
 
 import io.qameta.allure.*;
-import org.example.UITesting.config.SuiteDataProvider;
-import org.example.UITesting.helpers.ArraysSorter;
-import org.example.UITesting.helpers.Filter;
-import org.example.UITesting.helpers.Utils;
-import org.example.UITesting.pages.CustomersPage;
+import org.example.config.SuiteDataProvider;
+import org.example.uiTesting.helpers.ArraysSorter;
+import org.example.uiTesting.helpers.Filter;
+import org.example.uiTesting.helpers.Utils;
+import org.example.uiTesting.pages.CustomersPage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;

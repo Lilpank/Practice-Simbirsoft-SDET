@@ -1,10 +1,10 @@
-package org.example.UITesting.tests;
+package org.example.uiTesting.tests;
 
 import io.qameta.allure.*;
-import org.example.UITesting.config.SuiteDataProvider;
-import org.example.UITesting.dto.CustomerDTO;
-import org.example.UITesting.helpers.Generator;
-import org.example.UITesting.pages.AddCustomerPage;
+import org.example.config.SuiteDataProvider;
+import org.example.uiTesting.dto.CustomerDTO;
+import org.example.uiTesting.helpers.Generator;
+import org.example.uiTesting.pages.AddCustomerPage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;

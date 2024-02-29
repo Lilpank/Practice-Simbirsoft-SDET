@@ -1,4 +1,4 @@
-package org.example.APITesting.helpers;
+package org.example.apiTesting.helpers;
 
 import lombok.Getter;
 
