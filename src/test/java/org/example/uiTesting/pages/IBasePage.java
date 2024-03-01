@@ -1,4 +1,4 @@
-package org.example.pages;
+package org.example.uiTesting.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

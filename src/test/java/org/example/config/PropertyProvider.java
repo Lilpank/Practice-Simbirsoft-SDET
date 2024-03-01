@@ -6,17 +6,23 @@ import java.util.Properties;
 
 public class PropertyProvider {
     private static final Properties envProperties = new Properties();
-    private final static String rootPath = "src/test/resources/";
+    private final static String resourcePath = "src/test/resources/";
 
     static {
         try {
-            envProperties.load(new FileInputStream(rootPath + "env.properties"));
+            envProperties.load(new FileInputStream(resourcePath + "env.properties"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static String getPropertyWebUrl() {
-        return envProperties.getProperty("web.url");
+    /**
+     * A method to provide data for API URL.
+     *
+     * @param key key from property file, example - api.url
+     * @return url for API
+     */
+    public static String getProperty(String key) {
+        return envProperties.getProperty(key);
     }
 }
