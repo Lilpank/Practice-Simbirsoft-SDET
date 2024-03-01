@@ -9,12 +9,17 @@
             <class name="org.example.uiTesting.tests.CustomersTest"/>
         </classes>
     </test>
-    <parameter name="apiUrl"
-               value="http://localhost"/>
-    <test name="API" parallel="classes">
-        <classes>
-            <class name="org.example.apiTesting.tests.EntityTest"/>
-        </classes>
-    </test>
+        <parameter name="apiUrl"
+                   value="http://localhost"/>
+        <test name="API" parallel="methods">
+            <classes>
+                <class name="org.example.apiTesting.tests.EntityTest">
+                    <methods >
+                        <include name="testCycleOfCreateGetDeleteEntityRequest"/>
+                        <include name="testGetEntities"/>
+                    </methods>
+                </class>
+            </classes>
+        </test>
 </suite>
 

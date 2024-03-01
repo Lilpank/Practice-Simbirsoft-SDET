@@ -1,8 +1,5 @@
 package org.example.apiTesting.tests;
 
-import io.qameta.allure.Owner;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Step;
 import io.restassured.mapper.ObjectMapperType;
 import io.restassured.specification.RequestSpecification;
@@ -25,8 +22,6 @@ public class StepsEntity extends EntityTest {
      * @return id of created entity
      */
     @Step("Create Entity by pojo body")
-    @Severity(SeverityLevel.NORMAL)
-    @Owner("DanGor")
     public static int testCreateEntityRequestStep(EntityPojo entityPojo) {
         var response = given()
                 .spec(requestSpec)
@@ -47,8 +42,6 @@ public class StepsEntity extends EntityTest {
      * @return response entityPojo by id
      */
     @Step("Get Entity by ID is {idEntity}")
-    @Severity(SeverityLevel.NORMAL)
-    @Owner("DanGor")
     public static EntityPojo testGetEntityRequestStep(int idEntity) {
         return given()
                 .spec(requestSpec)
@@ -67,8 +60,6 @@ public class StepsEntity extends EntityTest {
      * @param responsePojo response EntityPojo
      */
     @Step("Compares Entities request and response")
-    @Severity(SeverityLevel.CRITICAL)
-    @Owner("DanGor")
     public static void testEqualsRequestAndResponseEntityStep(EntityPojo entityPojo, EntityPojo responsePojo) {
         softAssert.assertEquals(entityPojo.getId(), responsePojo.getId());
         softAssert.assertEquals(entityPojo.getAddition(), responsePojo.getAddition());
@@ -83,8 +74,6 @@ public class StepsEntity extends EntityTest {
      * @param idEntity id of entity
      */
     @Step("Delete Entity by ID is {idEntity}")
-    @Severity(SeverityLevel.NORMAL)
-    @Owner("DanGor")
     public static void testDeleteRequestEntityByIdStep(int idEntity) {
         given()
                 .spec(requestSpec)
@@ -100,8 +89,6 @@ public class StepsEntity extends EntityTest {
      * @param idEntity id of entity
      */
     @Step("Update Entity by ID is {idEntity}")
-    @Severity(SeverityLevel.NORMAL)
-    @Owner("DanGor")
     public static void testPatchRequestEntityByIdStep(int idEntity, EntityPojo entityPojo) {
         given()
                 .spec(requestSpec)
